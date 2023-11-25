@@ -1,0 +1,83 @@
+<!-- res/layout/item_product.xml -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- Image -->
+    <ImageView
+        android:id="@+id/imageProduct"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/lettuce"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/textViewProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@id/imageProduct"
+        android:text="Product Name"
+        android:textSize="18sp" />
+
+    <!-- Brand -->
+    <TextView
+        android:id="@+id/textViewBrand"
+        android:layout_width="116dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewProductName"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@+id/imageProduct"
+        android:text="Brand"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp" />
+
+    <!-- Buttons and Amount Layout -->
+    <LinearLayout
+        android:id="@+id/layoutButtonsAndAmount"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewBrand"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-44dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal">
+
+        <!-- Minus Button -->
+        <Button
+            android:id="@+id/btnMinus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="-"
+            android:onClick="onMinusButtonClick"/>
+
+        <!-- Amount Display -->
+        <TextView
+            android:id="@+id/textViewAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="16sp" />
+
+        <!-- Plus Button -->
+        <Button
+            android:id="@+id/btnPlus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+"
+            android:onClick="onPlusButtonClick"/>
+    </LinearLayout>
+</RelativeLayout>
