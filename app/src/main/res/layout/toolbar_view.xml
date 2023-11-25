@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Toolbar with icon buttons aligned to the left and right, and a centered title -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/orange">
+
+        <!-- Linear layout to position buttons and title -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- Back button -->
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/orange"
+                android:contentDescription="@string/back"
+                android:onClick="onBackButtonClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/back_arrow" />
+
+            <!-- Spacer to push title and home button to the right -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <!-- Title TextView -->
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="207dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Title"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <!-- Spacer to push home button to the right -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <!-- Home button -->
+            <ImageButton
+                android:id="@+id/btnHome"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/orange"
+                android:contentDescription="@string/home"
+                android:onClick="onHomeButtonClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/home" />
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Rest of your layout goes here -->
+
+</RelativeLayout>

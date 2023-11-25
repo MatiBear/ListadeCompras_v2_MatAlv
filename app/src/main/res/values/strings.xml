@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PurchaseList_v2_MatAlv</string>
+    <string name="welcome_title">Welcome to the Purchase List</string>
+    <string name="home">Inicio</string>
+    <string name="back">Atrás</string>
+    <string name="inventory">Inventory</string>
+    <string name="registry">Movement Registry</string>
+    <string name="products">Products</string>
+    <string name="title_main">Purchase List</string>
+</resources>

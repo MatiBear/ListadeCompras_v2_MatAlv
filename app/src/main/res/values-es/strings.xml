@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ListadeCompras_v2_MatAlv</string>
+    <string name="welcome_title">Bienvenido a la Lista de Compras</string>
+    <string name="home">Home</string>
+    <string name="back">Back</string>
+    <string name="inventory">Inventario</string>
+    <string name="registry">Registro de Movimientos</string>
+    <string name="products">Productos</string>
+    <string name="title_main">Lista de Compras</string>
+</resources>
