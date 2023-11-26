@@ -14,7 +14,8 @@
         android:src="@drawable/lettuce"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginEnd="16dp"
+        android:contentDescription="product" />
 
     <!-- Name -->
     <TextView
@@ -69,7 +70,7 @@
             android:onClick="onMinusButtonClick"
             android:scaleType="centerInside"
             android:src="@drawable/button_minus"
-            android:contentDescription="." />
+            android:contentDescription="@string/minus" />
 
         <!-- Amount Display -->
         <TextView
@@ -88,10 +89,9 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="24dp"
             android:backgroundTint="@color/redorange"
-            android:text="+"
             android:onClick="onPlusButtonClick"
             android:scaleType="centerInside"
             android:src="@drawable/button_plus"
-            android:contentDescription="+" />
+            android:contentDescription="@string/plus" />
     </LinearLayout>
 </RelativeLayout>
