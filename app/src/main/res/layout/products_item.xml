@@ -21,63 +21,77 @@
         android:id="@+id/textViewProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="5dp"
         android:layout_marginEnd="16dp"
         android:layout_toEndOf="@id/imageProduct"
-        android:text="Product Name"
-        android:textSize="18sp" />
+        android:text="@string/product_name"
+        android:textSize="18sp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="7sp"
+        android:autoSizeMaxTextSize="18sp"
+        android:autoSizeStepGranularity="2sp"/>
 
-    <!-- Brand -->
+    <!-- Type -->
     <TextView
-        android:id="@+id/textViewBrand"
+        android:id="@+id/textViewType"
         android:layout_width="116dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewProductName"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="16dp"
         android:layout_toEndOf="@+id/imageProduct"
-        android:text="Brand"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="14sp" />
+        android:text="@string/type"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="7sp"
+        android:autoSizeMaxTextSize="18sp"
+        android:autoSizeStepGranularity="2sp"/>
 
     <!-- Buttons and Amount Layout -->
     <LinearLayout
         android:id="@+id/layoutButtonsAndAmount"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewBrand"
+        android:layout_width="156dp"
+        android:layout_height="49dp"
+        android:layout_below="@id/textViewType"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="-44dp"
-        android:layout_marginEnd="1dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal">
 
         <!-- Minus Button -->
-        <Button
+        <ImageButton
             android:id="@+id/btnMinus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="-"
-            android:onClick="onMinusButtonClick"/>
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/redorange"
+            android:onClick="onMinusButtonClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/button_minus"
+            android:contentDescription="." />
 
         <!-- Amount Display -->
         <TextView
             android:id="@+id/textViewAmount"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="0"
             android:textSize="16sp" />
 
         <!-- Plus Button -->
-        <Button
+        <ImageButton
             android:id="@+id/btnPlus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="46dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/redorange"
             android:text="+"
-            android:onClick="onPlusButtonClick"/>
+            android:onClick="onPlusButtonClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/button_plus"
+            android:contentDescription="+" />
     </LinearLayout>
 </RelativeLayout>
