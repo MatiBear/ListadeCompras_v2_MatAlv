@@ -1,5 +1,6 @@
 package com.example.listadecompras_v2_matalv
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -28,12 +29,14 @@ class MainActivity : AppCompatActivity() {
 
     // Handle the Products button click
     fun onProductsButtonClick(view: View) {
-        // Implement the logic for the Products button click
+        val intent = Intent(this, ProductsActivity::class.java)
+        startActivity(intent)
     }
 
     // Handle the Inventory button click
     fun onInventoryButtonClick(view: View) {
-        // Implement the logic for the Inventory button click
+        val intent = Intent(this, InventoryActivity::class.java)
+        startActivity(intent)
     }
 
     // Handle the Movement Registry button click

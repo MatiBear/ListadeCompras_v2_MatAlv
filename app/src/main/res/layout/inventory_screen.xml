@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/inventory_screen.xml -->
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beige"
-    tools:context=".ProductsActivity">
+    android:background="@color/beige">
 
     <!-- Toolbar with icon buttons aligned to the left and right, and a centered title -->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarProducts"
+        android:id="@+id/toolbarInventory"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/orange">
@@ -22,7 +21,7 @@
 
             <!-- Back button -->
             <ImageButton
-                android:id="@+id/btnBackProducts"
+                android:id="@+id/btnBackInventory"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/orange"
@@ -39,11 +38,11 @@
 
             <!-- Title TextView -->
             <TextView
-                android:id="@+id/toolbarTitleProducts"
+                android:id="@+id/toolbarTitleInventory"
                 android:layout_width="207dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/products"
+                android:text="@string/inventory"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
@@ -55,61 +54,59 @@
 
             <!-- Home button -->
             <ImageButton
-                android:id="@+id/btnHomeProducts"
+                android:id="@+id/btnHomeInventory"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/orange"
                 android:contentDescription="@string/home"
-                android:onClick="onHomeButtonClick"
                 android:scaleType="fitCenter"
                 android:src="@drawable/home" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Linear layout for search and sort -->
+    <!-- Linear layout for search, sort, and update buttons -->
     <LinearLayout
+        android:id="@id/anotherLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbarProducts"
+        android:layout_height="95dp"
+        android:layout_below="@id/toolbarInventory"
         android:orientation="horizontal"
         android:padding="16dp">
 
         <!-- Search area -->
         <EditText
-            android:id="@+id/editTextSearch"
-            android:layout_width="148dp"
+            android:id="@+id/editTextSearchInventory"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/search"
-            android:autofillHints="" />
+            android:hint="@string/search" />
 
         <!-- Sort button -->
         <Button
-            android:id="@+id/btnSort"
-            android:layout_width="98dp"
+            android:id="@+id/btnSortInventory"
+            android:layout_width="103dp"
             android:layout_height="wrap_content"
-            android:text="@string/sort" />
+            android:text="@string/sort_by_name" />
 
-        <!-- Text view to display sorting order -->
-        <TextView
-            android:id="@+id/textViewSortingOrder"
-            android:layout_width="wrap_content"
+        <!-- Update inventory button -->
+        <Button
+            android:id="@+id/btnUpdateInventory"
+            android:layout_width="129dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/sorted_by_name"/>
+            android:onClick="onUpdateInventoryClick"
+            android:text="@string/save_inventory" />
 
     </LinearLayout>
 
-    <!-- RecyclerView for displaying products -->
+    <!-- Inventory items (RecyclerView, ListView, etc.) -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewProducts"
+        android:id="@+id/recyclerViewInventory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarProducts"
-        android:layout_marginTop="70dp"
+        android:layout_below="@id/anotherLayout"
+        android:layout_marginTop="0dp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="0dp"
-        android:padding="16dp"/>
-
+        android:padding="16dp" />
 </RelativeLayout>
