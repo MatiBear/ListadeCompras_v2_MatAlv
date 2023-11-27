@@ -42,4 +42,5 @@
     <string name="inventory_updated">Inventory Updated</string>
     <string name="products_added_to_inventory">Products added to inventory</string>
     <string name="save_inventory">Save Inventory</string>
+    <string name="movement_registry">Movement Registry</string>
 </resources>
