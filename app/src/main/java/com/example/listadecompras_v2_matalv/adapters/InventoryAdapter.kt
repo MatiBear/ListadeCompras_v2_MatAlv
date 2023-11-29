@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -14,14 +15,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listadecompras_v2_matalv.R
 import com.example.listadecompras_v2_matalv.classData.ProductData
-import com.example.listadecompras_v2_matalv.dataStorage.InventoryManager
+import com.example.listadecompras_v2_matalv.ProductViewModel
 
 class InventoryAdapter(
     private val context: Context,
-    private val inventoryManager: InventoryManager,
+    private val productViewModel: ProductViewModel,
 ) : RecyclerView.Adapter<InventoryAdapter.ViewHolder>() {
 
-    private var itemList: List<ProductData> = inventoryManager.getInventoryList()
+    private var itemList: List<ProductData> = productViewModel.getAllProductsList()
     private val editedItems = mutableSetOf<ProductData>() // New set to track edited items
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -31,8 +32,7 @@ class InventoryAdapter(
         val editTextPricePerUnit: EditText = view.findViewById(R.id.editTextPricePerUnit)
         val textViewTotalPrice: TextView = view.findViewById(R.id.textViewTotalPrice)
         val textViewAmount: TextView = view.findViewById(R.id.textViewAmount)
-        val btnMinus: ImageButton = view.findViewById(R.id.btnMinus)
-        val btnPlus: ImageButton = view.findViewById(R.id.btnPlus)
+        val btnEdit: Button = view.findViewById(R.id.btnEdit)
         val btnDeleteInventoryItem: ImageButton = view.findViewById(R.id.btnDeleteInventoryItem)
     }
 
@@ -45,7 +45,7 @@ class InventoryAdapter(
     @SuppressLint("StringFormatInvalid", "SetTextI18n", "StringFormatMatches")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val inventoryItem = inventoryManager.GetCurrentInventoryList()[position]
+        val inventoryItem = productViewModel.getAllProductsList()[position]
 
         // Set values for the views
         holder.imageInventoryItem.setImageResource(inventoryItem.imageResId)
@@ -58,14 +58,9 @@ class InventoryAdapter(
         // Set the initial amount
         holder.textViewAmount.text = inventoryItem.amount.toString()
 
-        // Minus button click listener
-        holder.btnMinus.setOnClickListener {
-            onMinusButtonClick(inventoryItem, holder)
-        }
-
-        // Plus button click listener
-        holder.btnPlus.setOnClickListener {
-            onPlusButtonClick(inventoryItem, holder)
+        // Edit button click listener
+        holder.btnEdit.setOnClickListener {
+            onEditButtonClick(inventoryItem)
         }
 
         // Delete button click listener
@@ -87,29 +82,15 @@ class InventoryAdapter(
                     inventoryItem.totalPrice = pricePerUnit * inventoryItem.amount
                     holder.textViewTotalPrice.text = context.getString(R.string.total_price_add, inventoryItem.totalPrice)
 
-                    // Update the underlying data in InventoryManager
-                    inventoryManager.updateInventoryItem(inventoryItem)
+                    // Update the underlying data in ProductViewModel
+                    productViewModel.updateProduct(inventoryItem)
                 }
             }
         })
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun onMinusButtonClick(item: ProductData, holder: ViewHolder) {
-        val newAmount = item.amount - 1
-        if (newAmount > 0) {
-            item.amount = newAmount
-            editedItems.add(item) // Mark the item as edited
-            notifyDataSetChanged()
-        }
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun onPlusButtonClick(item: ProductData, holder: ViewHolder) {
-        val newAmount = item.amount + 1
-        item.amount = newAmount
-        editedItems.add(item) // Mark the item as edited
-        notifyDataSetChanged()
+    fun getItemAtPosition(position: Int): ProductData {
+        return productViewModel.getAllProductsList()[position]
     }
 
     private fun updateAmountAndTotalPrice(item: ProductData, holder: ViewHolder) {
@@ -119,10 +100,10 @@ class InventoryAdapter(
         // Check if the new amount is 0
         if (item.amount <= 0) {
             // Remove the item from the list
-            val position = inventoryManager.currentInventoryList.indexOf(item)
+            val position = productViewModel.getAllProductsList().indexOf(item)
 
             // Remove the item from the list
-            inventoryManager.removeProduct(item)
+            productViewModel.deleteProduct(item)
 
             // Notify the adapter about the item removal
             notifyItemRemoved(position)
@@ -131,11 +112,10 @@ class InventoryAdapter(
             // Update the price per unit and total price
             updatePriceAndTotalPrice(item, holder)
 
-            // Update the underlying data in InventoryManager
-            inventoryManager.updateInventoryItem(item)
+            // Update the underlying data in ProductViewModel
+            productViewModel.updateProduct(item)
         }
     }
-
 
     @SuppressLint("StringFormatInvalid", "StringFormatMatches", "NotifyDataSetChanged")
     fun updatePriceAndTotalPrice(item: ProductData, holder: ViewHolder) {
@@ -157,7 +137,7 @@ class InventoryAdapter(
     private fun onDeleteButtonClick(item: ProductData, position: Int) {
 
         // Remove the item from the list
-        inventoryManager.removeInventoryItem(item)
+        productViewModel.deleteProduct(item)
 
         // Notify the adapter about the item removal
         notifyItemRemoved(position)
@@ -167,18 +147,27 @@ class InventoryAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun updateInventory(newList: List<ProductData>) {
         editedItems.clear() // Clear the set of edited items
-        inventoryManager.clearInventoryList()
-        inventoryManager.updateInventoryList(newList)
+        productViewModel.clearProductList()
+        productViewModel.updateProductList(newList)
         notifyDataSetChanged()
     }
 
     fun updateList(newList: List<ProductData>) {
-        inventoryManager.clearInventoryList()
-        inventoryManager.updateInventoryList(newList)
+        productViewModel.clearProductList()
+        productViewModel.updateProductList(newList)
         notifyDataSetChanged()
     }
 
+    private fun onEditButtonClick(item: ProductData) {
+        // Placeholder for the edit action
+        // You can launch an edit screen or perform any other action based on the item
+        // For example:
+        // val intent = Intent(context, YourEditActivity::class.java)
+        // intent.putExtra("productData", item)
+        // context.startActivity(intent)
+    }
+
     override fun getItemCount(): Int {
-        return inventoryManager.GetCurrentInventoryList().size
+        return productViewModel.getAllProductsList().size
     }
 }

@@ -44,15 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/price_per_unit" />
-
-            <EditText
-                android:id="@+id/editTextPricePerUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/price_per_unit"
-                android:inputType="numberDecimal"
-                android:text="@string/zero_zero"
-                android:autofillHints="" />
         </LinearLayout>
 
 
@@ -63,6 +54,12 @@
             android:layout_height="wrap_content"
             android:text="@string/total_price" />
 
+        <TextView
+            android:id="@+id/textViewAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/amount" />
+
     </LinearLayout>
 
     <!-- Price per Unit -->
@@ -71,46 +68,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/layoutButtonsAndAmount"
-            android:layout_width="156dp"
-            android:layout_height="49dp"
-            android:layout_marginEnd="-20dp"
-            android:orientation="horizontal">
-
-            <!-- Minus Button -->
-            <ImageButton
-                android:id="@+id/btnMinus"
-                android:layout_width="47dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/redorange"
-                android:contentDescription="@string/minus"
-                android:onClick="onMinusButtonClick"
-                android:scaleType="centerInside"
-                android:src="@drawable/button_minus" />
-
-            <!-- Amount Display -->
-            <TextView
-                android:id="@+id/textViewAmount"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/zero"
-                android:textSize="16sp" />
-
-            <!-- Plus Button -->
-            <ImageButton
-                android:id="@+id/btnPlus"
-                android:layout_width="46dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="24dp"
-                android:backgroundTint="@color/redorange"
-                android:contentDescription="@string/plus"
-                android:onClick="onPlusButtonClick"
-                android:scaleType="centerInside"
-                android:src="@drawable/button_plus" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="103dp"
+            android:layout_height="wrap_content"
+            android:text="@string/edit" />
 
         <ImageButton
             android:id="@+id/btnDeleteInventoryItem"

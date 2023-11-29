@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".InventoryApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -26,10 +27,10 @@
             android:name=".MainActivity"
             android:exported="false"/>
         <activity
-            android:name=".ProductsActivity"
+            android:name=".InventoryActivity"
             android:exported="false"/>
         <activity
-            android:name=".InventoryActivity"
+            android:name=".EditItemActivity"
             android:exported="false"/>
         <activity
             android:name=".RegistryActivity"
