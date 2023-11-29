@@ -27,12 +27,6 @@ class MainActivity : AppCompatActivity() {
         btnHome.visibility = View.GONE
     }
 
-    // Handle the Products button click
-    fun onProductsButtonClick(view: View) {
-        val intent = Intent(this, ProductsActivity::class.java)
-        startActivity(intent)
-    }
-
     // Handle the Inventory button click
     fun onInventoryButtonClick(view: View) {
         val intent = Intent(this, InventoryActivity::class.java)
@@ -41,7 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     // Handle the Movement Registry button click
     fun onMovementRegistryButtonClick(view: View) {
-        // Implement the logic for the Movement Registry button click
+        val intent = Intent(this, RegistryActivity::class.java)
+        startActivity(intent)
     }
 
     // Handle the back button click

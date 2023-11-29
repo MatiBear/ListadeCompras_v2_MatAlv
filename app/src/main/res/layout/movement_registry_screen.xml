@@ -67,9 +67,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:layout_margin="16dp"
-        android:text="Clear Registry"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/clear_registry"
+        android:onClick="onClearRegistryClick"/>
 
     <!-- List of Items -->
     <androidx.recyclerview.widget.RecyclerView

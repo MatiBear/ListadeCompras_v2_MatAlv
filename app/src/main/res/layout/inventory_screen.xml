@@ -42,7 +42,8 @@
                 android:gravity="center"
                 android:text="@string/inventory"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:onClick="onNewItemClick"/>
 
             <!-- Spacer to push home button to the right -->
             <View
@@ -57,6 +58,7 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/orange"
                 android:contentDescription="@string/home"
+                android:onClick="onNewItemClick"
                 android:scaleType="fitCenter"
                 android:src="@drawable/home" />
 
@@ -78,7 +80,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/search" />
+            android:hint="@string/search"
+            android:autofillHints="" />
 
         <!-- Sort button -->
         <Button

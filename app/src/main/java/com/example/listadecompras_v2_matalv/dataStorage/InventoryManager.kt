@@ -3,6 +3,7 @@ package com.example.listadecompras_v2_matalv.dataStorage
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.listadecompras_v2_matalv.classData.ProductData
+import com.example.listadecompras_v2_matalv.classData.RegistryData
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -13,12 +14,26 @@ class InventoryManager(context: Context) {
 
     private val inventoryKey = "inventoryList"
 
+    private val registryManager = RegistryManager(context)
     var currentInventoryList: List<ProductData> = getInventoryList()
 
     fun addProduct(product: ProductData) {
         val inventoryList = getInventoryList().toMutableList()
         inventoryList.add(product)
         saveInventoryList(inventoryList)
+
+        // Create MoveRegistryItem for the addition action
+        val moveRegistryItem = RegistryData(
+            iconResId = product.imageResId,
+            itemName = product.name,
+            itemType = product.type,
+            timestamp = registryManager.getCurrentTimestamp(),
+            actionType = "Addition",
+            valueChanged = "+${product.amount}"
+        )
+
+        // Add the MoveRegistryItem to the MoveRegistryManager
+        registryManager.addMoveRegistryItem(moveRegistryItem)
     }
 
     fun removeProduct(product: ProductData) {
@@ -46,7 +61,7 @@ class InventoryManager(context: Context) {
         }
     }
 
-    fun updateInventoryPrice(productId: Int, newPrice: Double) {
+    /*fun updateInventoryPrice(productId: Int, newPrice: Double) {
         val existingProduct = currentInventoryList.find { it.id == productId }
         existingProduct?.let {
             currentInventoryList = currentInventoryList.map { p ->
@@ -55,13 +70,14 @@ class InventoryManager(context: Context) {
                 } else p
             }
         }
-    }
+    }*/
 
     fun updateProduct(product: ProductData) {
         val inventoryList = getInventoryList().toMutableList()
         val existingProduct = inventoryList.find { it.id == product.id }
         existingProduct?.let {
             it.name = product.name
+            it.imageName = product.imageName
             it.imageResId = product.imageResId
             it.type = product.type
             it.amount = product.amount
@@ -87,6 +103,7 @@ class InventoryManager(context: Context) {
             val jsonObject = JSONObject()
             jsonObject.put("id", product.id)
             jsonObject.put("name", product.name)
+            jsonObject.put("imageName", product.imageName)
             jsonObject.put("imageResId", product.imageResId)
             jsonObject.put("type", product.type)
             jsonObject.put("amount", product.amount)
@@ -103,8 +120,9 @@ class InventoryManager(context: Context) {
         for (i in 0 until jsonArray.length()) {
             val jsonObject = jsonArray.getJSONObject(i)
             val product = ProductData(
-                jsonObject.getInt("id"),
+                jsonObject.getLong("id"),
                 jsonObject.getString("name"),
+                jsonObject.getString("imageName"),
                 jsonObject.getInt("imageResId"),
                 jsonObject.getString("type"),
                 jsonObject.getInt("amount"),
@@ -118,12 +136,12 @@ class InventoryManager(context: Context) {
 
     fun getProductById(productId: Int): ProductData? {
         val inventoryList = getInventoryList()
-        return inventoryList.find { it.id == productId }
+        return inventoryList.find { it.id == productId.toLong() }
     }
 
     fun updateProductAmount(productId: Int, newAmount: Int) {
         val inventoryList = getInventoryList().toMutableList()
-        val existingProduct = inventoryList.find { it.id == productId }
+        val existingProduct = inventoryList.find { it.id == productId.toLong() }
 
         existingProduct?.let {
             it.amount = newAmount

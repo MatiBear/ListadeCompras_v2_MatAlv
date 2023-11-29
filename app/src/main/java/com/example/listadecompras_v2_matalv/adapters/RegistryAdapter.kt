@@ -1,6 +1,8 @@
 package com.example.listadecompras_v2_matalv.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +14,8 @@ import com.example.listadecompras_v2_matalv.classData.RegistryData
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MoveRegistryAdapter(private val context: Context) :
-    RecyclerView.Adapter<MoveRegistryAdapter.ViewHolder>() {
+class RegistryAdapter(private val context: Context) :
+    RecyclerView.Adapter<RegistryAdapter.ViewHolder>() {
 
     private var moveRegistryList: List<RegistryData> = emptyList()
 
@@ -42,8 +44,11 @@ class MoveRegistryAdapter(private val context: Context) :
         // Format the timestamp
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val formattedDate = dateFormat.parse(moveRegistryItem.timestamp)
-        holder.timestampTextView.text = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
-            .format(formattedDate)
+        holder.timestampTextView.text =
+            formattedDate?.let {
+                SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+                    .format(it)
+            }
 
         holder.actionTypeTextView.text = moveRegistryItem.actionType
         holder.valueChangedTextView.text = moveRegistryItem.valueChanged
@@ -53,7 +58,9 @@ class MoveRegistryAdapter(private val context: Context) :
         return moveRegistryList.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateMoveRegistryList(newList: List<RegistryData>) {
+        Log.d("RegistryAdapter", "New list size: ${newList.size}")
         moveRegistryList = newList
         notifyDataSetChanged()
     }

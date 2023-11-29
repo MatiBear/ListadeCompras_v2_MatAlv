@@ -28,19 +28,29 @@
     <string name="personal_hygiene">Personal Hygiene</string>
     <string name="amoxicillin">Amoxicillin</string>
     <string name="medicine">Medicine</string>
-    <string name="plus">+</string>
-    <string name="minus">-</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="minus" translatable="false">-</string>
     <string name="update_inventory">Update Inventory</string>
     <string name="image">Image</string>
     <string name="name">Name</string>
     <string name="price_per_unit">Price per Unit</string>
     <string name="total_price">Total Price</string>
     <string name="delete">Delete</string>
-    <string name="zero_zero">0.0</string>
-    <string name="zero">0</string>
+    <string name="zero_zero" translatable="false">0.0</string>
+    <string name="zero" translatable="false">0</string>
     <string name="total_price_add">"Total Price: %s"</string>
     <string name="inventory_updated">Inventory Updated</string>
     <string name="products_added_to_inventory">Products added to inventory</string>
     <string name="save_inventory">Save Inventory</string>
     <string name="movement_registry">Movement Registry</string>
+    <string name="clear_registry">Clear Registry</string>
+    <string name="amount">Amount</string>
+    <string name="confirm">Confirm</string>
+    <string name="adding_new_item">Adding New Item</string>
+    <string name="value">Value</string>
+    <string name="new_item">New Item</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="add_item">Add Item</string>
+    <string name="update_item">Update Item</string>
+    <string name="edit">Edit</string>
 </resources>
