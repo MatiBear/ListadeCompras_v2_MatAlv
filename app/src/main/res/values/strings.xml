@@ -53,4 +53,9 @@
     <string name="add_item">Add Item</string>
     <string name="update_item">Update Item</string>
     <string name="edit">Edit</string>
+    <string name="amount_add">Amount: %s</string>
+    <string name="price_per_unit_add">Price per Unit: %s</string>
+    <string name="others">Others</string>
+    <string name="box">Box</string>
+    <string name="aspirin">Aspirin</string>
 </resources>

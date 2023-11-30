@@ -55,10 +55,15 @@ class InventoryActivity : AppCompatActivity() {
                 // Not needed for this example
             }
         })
+
+        // Observe changes in the product list
+        productViewModel.allProducts.observe(this) { productList ->
+            adapter.updateList(productList)
+        }
     }
 
     private fun filterProducts(query: String) {
-
+        showSortOptionsDialog()
     }
 
     fun onNewItemClick(view: View) {
@@ -89,24 +94,19 @@ class InventoryActivity : AppCompatActivity() {
         finish()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun onUpdateInventoryClick(view: View) {
-        for (i in 0 until adapter.itemCount) {
-            val holder = recyclerView.findViewHolderForAdapterPosition(i) as? InventoryAdapter.ViewHolder
-            val productData = adapter.getItemAtPosition(i)
-            holder?.let {
-                val pricePerUnit = it.editTextPricePerUnit.text.toString().toDoubleOrNull() ?: 0.0
-                productData.price = pricePerUnit
-                productViewModel.updateProduct(productData)
-            }
-        }
-
-        // Notify the adapter about the data change
-        adapter.notifyDataSetChanged()
-
-        // Show a pop-up message
-        Toast.makeText(this, getString(R.string.inventory_updated), Toast.LENGTH_SHORT).show()
+        updateInventory()
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateInventory() {
+        // Get the latest data from the productViewModel
+        val newData = productViewModel.getAllProductsList()
+
+        // Update the entire list in the adapter
+        adapter.updateList(newData)
+    }
+
 
     private fun showSortOptionsDialog() {
         val options = arrayOf(
@@ -131,5 +131,10 @@ class InventoryActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             .show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateInventory()
     }
 }

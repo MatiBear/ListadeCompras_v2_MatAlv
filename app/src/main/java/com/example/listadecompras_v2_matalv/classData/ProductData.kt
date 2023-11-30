@@ -6,7 +6,7 @@ import java.io.Serializable
 
 @Entity(tableName = "products")
 data class ProductData(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     var name: String,
     var imageName: String,
     var imageResId: Int,

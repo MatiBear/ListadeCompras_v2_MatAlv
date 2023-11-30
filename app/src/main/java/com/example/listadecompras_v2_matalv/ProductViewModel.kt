@@ -28,13 +28,16 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         productDataDao = AppDatabase.getDatabase(application).productDataDao()
 
         // Initialize MutableLiveData objects
-        _allProducts = MutableLiveData()
-        _displayList = MutableLiveData()
+        _allProducts = MutableLiveData<List<ProductData>>().apply {
+            postValue(emptyList()) // or initial data if available
+        }
+        _displayList = MutableLiveData<List<ProductData>>().apply {
+            postValue(emptyList()) // or initial data if available
+        }
 
         // Fetch data from productDao and update LiveData
         fetchData()
     }
-
 
     fun clearProductList() {
         // Clear the list of products
@@ -70,15 +73,46 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
             fetchData()
         }
     }
+    fun addNewProduct(productData: ProductData) {
+        CoroutineScope(Dispatchers.IO).launch {
+            // Generate a new ID for the new product
+            val newId = generateNewId()
+
+            // Set the new ID to the productData
+            productData.id = newId
+
+            // Insert the new product into the database
+            productDataDao.insertProduct(productData)
+
+            // Fetch data again to update LiveData
+            fetchData()
+
+            // Notify observers that the data has changed
+            _allProducts.postValue(_allProducts.value)
+        }
+    }
+
+    private fun generateNewId(): Long {
+        // You can implement your own logic to generate a unique ID,
+        // such as querying the database for the maximum ID and adding 1.
+        // For simplicity, let's assume a timestamp-based ID.
+        return System.currentTimeMillis()
+    }
 
     fun updateProduct(productData: ProductData) {
-        // Perform update operation on productDao
-        // You need to implement this method in your ProductDao
+        CoroutineScope(Dispatchers.IO).launch {
+            productDataDao.updateProduct(productData)
+            // After updating, fetch updated data
+            fetchData()
+        }
     }
 
     fun deleteProduct(productData: ProductData) {
-        // Perform delete operation on productDao
-        // You need to implement this method in your ProductDao
+        CoroutineScope(Dispatchers.IO).launch {
+            productDataDao.deleteProduct(productData)
+            // After deleting, fetch updated data
+            fetchData()
+        }
     }
 
     fun resetDisplayList() {
@@ -86,18 +120,19 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun searchProducts(query: String) {
-        // Implement search logic and update _displayList accordingly
-    }
-
-    fun sortProductsByName() {
         CoroutineScope(Dispatchers.IO).launch {
-            // Implement sorting logic by name
-            val sortedList = _allProducts.value?.sortedBy { it.name }
-            // Update the display list with sorted data
-            _displayList.postValue(sortedList)
+            // Implement search logic and update _displayList accordingly
+            val searchResult = _allProducts.value?.filter { it.name.contains(query, ignoreCase = true) }
+            _displayList.postValue(searchResult)
         }
     }
 
+    fun sortProductsByName() {
+        // Implement sorting logic by name
+        val sortedList = _allProducts.value?.sortedBy { it.name }
+        // Update the display list with sorted data
+        _displayList.postValue(sortedList)
+    }
 
     fun sortProductsByType() {
         // Implement sorting logic by type and update _displayList accordingly
